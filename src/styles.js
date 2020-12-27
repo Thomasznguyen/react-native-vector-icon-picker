@@ -9,6 +9,10 @@ export default StyleSheet.create({
         backgroundColor: "#000",
         flex: 1
     },
+    headerText: {
+        flexDirection: 'row',
+        marginBottom: 5,
+    },
     title: {
         color: '#00000089',
         fontSize: 18,

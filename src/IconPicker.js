@@ -73,7 +73,10 @@ class IconPicker extends Component {
 
         const {visible} = this.state;
         const {icons} = this.props;
-        const title = this.props.title ? this.props.title : 'Choose icon...';
+        // This version did not work with adding the title props
+        //const title = this.props.title ? this.props.title : 'Choose icon...';
+        const title = icons[0].title ? icons[0].title : 'Choose icon...';
+        const openText = icons[0].openText ? icons[0].openText : "Open Picker";
 
         const data = [];
         icons.map( i => {
@@ -97,10 +100,16 @@ class IconPicker extends Component {
                     }}>
                     <View style={styles.wrapper}>
                         <View style={styles.content}>
+                            <View style={styless.headerText}>
+                                <TouchableOpacity onPress={() => {this.setState({visible: false})}}>
+                                        <Ionicons name='close-outline' size={30} color="#000" />
+                                </TouchableOpacity>
+                            </View>
                             <Text style={styles.title}>{title}</Text>
                             <View>
                                 <FlatList
                                     data={this.formatData(data, numColumns)}
+                                    keyExtractor={(item) => item.icon}
                                     // style={styles.listContainer}
                                     renderItem={this.renderItem}
                                     numColumns={numColumns}
@@ -110,7 +119,7 @@ class IconPicker extends Component {
                     </View>
                 </Modal>
                 <TouchableOpacity onPress={() => this.setState({visible: true})}>
-                    <Text>Open picker</Text>
+                    <Text>{openText}</Text>
                 </TouchableOpacity>
             </>
         );
